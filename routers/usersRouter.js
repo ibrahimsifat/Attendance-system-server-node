@@ -1,13 +1,16 @@
 const router = require("express").Router();
-const userService = require("../services/users.services");
-
+const userController = require("../controllers/usersController");
+const authenticate = require("../middleware/auth/authenticate");
 // routers path:['/']
-router.route("/").get(userService.getAllUsers).post(userService.createUser);
+router
+  .route("/")
+  .get(authenticate, userController.getAllUsers)
+  .post(authenticate, userController.createUser);
 
 // routers path:['/:userId']
 router
   .route("/:userId")
-  .get(userService.getAUser)
-  .put(userService.updateAUser)
-  .delete(userService.deleteAUser);
+  .get(authenticate, userController.getAUser)
+  .put(authenticate, userController.updateAUser)
+  .delete(authenticate, userController.deleteAUser);
 module.exports = router;
