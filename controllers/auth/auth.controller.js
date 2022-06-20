@@ -1,11 +1,11 @@
 // internal import
 const authService = require("../../services/auth.services");
-
+const userService = require("../../services/users.services");
 // register controller to register the users
 const registerController = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
-    const user = await authService.registerService({ name, email, password });
+    const user = await userService.createUserService({ name, email, password });
     return res.status(201).json({ message: "User Created Successfully", user });
   } catch (error) {
     next(error);

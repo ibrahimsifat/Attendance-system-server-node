@@ -1,10 +1,40 @@
-const createUser = (req, res) => {};
+const userService = require("../services/users.services");
 
-const getAllUsers = (req, res) => {
-  res.send("all users");
+const createUser = async (req, res, next) => {
+  try {
+    const { name, email, password, roles, accountStatus } = req.body;
+    const user = await userService.createUserService({
+      name,
+      email,
+      password,
+      roles,
+      accountStatus,
+    });
+    res.status(200).json({ user });
+  } catch (error) {
+    next(error);
+  }
 };
 
-const getAUser = (req, res) => {};
+const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await userService.getAllUsersService();
+    res.status(200).json({ users });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// get a user with params id
+const getAUser = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const user = await userService.getUserByPropertyName(userId);
+    res.status(200).json({ user });
+  } catch (error) {
+    next(error);
+  }
+};
 const updateAUser = (req, res) => {};
 const deleteAUser = (req, res) => {};
 

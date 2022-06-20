@@ -25,6 +25,7 @@ const userSchema = new Schema({
   roles: {
     type: [String],
     required: true,
+    enum: ["ADMIN", "STUDENT"],
     default: ["STUDENT"],
   },
   accountStatus: {
