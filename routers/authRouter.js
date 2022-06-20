@@ -1,12 +1,12 @@
 const router = require("express").Router();
 
-const { registerService, loginService } = require("../services/auth");
-router.get("/get", (req, res) => {
-  res.send("this  is bangladesh");
-});
+const {
+  registerController,
+  loginController,
+} = require("../controllers/auth/auth.controller");
 
-router.post("/register", registerService);
+router.post("/register", registerController);
 
-router.post("/login", loginService);
+router.post("/login", loginController);
 
 module.exports = router;
